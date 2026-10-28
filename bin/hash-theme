@@ -1,0 +1,12 @@
+#!/bin/sh
+case "${1:-toggle}" in
+  tokyo) target=tokyo ;;
+  wallpaper) target=wallpaper ;;
+  toggle) case "$(noctalia msg color-scheme-get)" in wallpaper*) target=tokyo ;; *) target=wallpaper ;; esac ;;
+  *) echo "Usage: hash-theme [tokyo|wallpaper|toggle]" >&2; exit 2 ;;
+esac
+if [ "$target" = tokyo ]; then
+  noctalia msg color-scheme-set builtin Tokyo-Night && notify-send 'Theme' 'Tokyo Night'
+else
+  noctalia msg color-scheme-set wallpaper m3-tonal-spot && notify-send 'Theme' 'Colors follow the wallpaper'
+fi

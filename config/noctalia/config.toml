@@ -1,0 +1,136 @@
+[shell]
+font_family = "Inter"
+corner_radius_scale = 1.0
+time_format = "{:%H:%M}"
+telemetry_enabled = false
+setup_wizard_enabled = false
+polkit_agent = false
+clipboard_enabled = true
+clipboard_history_max_entries = 200
+clipboard_keep_from_closed_apps = false
+clipboard_auto_paste = "off"
+clipboard_image_action_command = "satty -f {path}"
+[shell.animation]
+speed = 1.35
+[shell.panel]
+transparency_mode = "soft"
+borders = true
+launcher_placement = "floating"
+clipboard_placement = "floating"
+control_center_placement = "attached"
+[shell.launcher]
+layout = "full"
+width = 840
+default_view = "pinned"
+app_grid = true
+show_app_origin_indicator = false
+pinned = ["com.mitchellh.ghostty", "zen", "dev.hash.Editor", "thunar", "localsend", "com.obsproject.Studio"]
+[shell.window_switcher]
+style = "carousel"
+mru = true
+[wallpaper]
+enabled = true
+directory = "~/.local/share/backgrounds"
+transition = ["fade"]
+transition_duration = 250
+[wallpaper.default]
+path = "~/.local/share/backgrounds/alpine-blue-hour.png"
+[theme]
+mode = "dark"
+source = "builtin"
+builtin = "Tokyo-Night"
+[theme.templates]
+enable_builtin_templates = true
+builtin_ids = ["ghostty", "gtk3", "gtk4", "qt", "kcolorscheme", "hyprland"]
+enable_community_templates = false
+[notification]
+enable_daemon = true
+show_actions = true
+keep_dismissed_in_history = true
+background_opacity = 0.97
+follow_focused_output = true
+[osd]
+position = "top_right"
+hide_delay_ms = 1100
+[lockscreen]
+enabled = true
+lock_before_suspend = true
+transition = ["fade"]
+transition_duration = 200
+[system.monitor]
+cpu_poll_seconds = 3.0
+gpu_poll_seconds = 10.0
+memory_poll_seconds = 3.0
+[weather]
+enabled = false
+[nightlight]
+enabled = true
+temperature_day = 6500
+temperature_night = 4200
+[location]
+auto_locate = false
+custom_schedule = true
+sunset = "21:00"
+sunrise = "07:00"
+[idle.behavior.lock]
+enabled = false
+timeout = 600
+action = "lock"
+[idle.behavior.screen-off]
+enabled = false
+timeout = 660
+action = "screen_off"
+[bar.main]
+position = "top"
+thickness = 36
+margin_ends = 12
+margin_edge = 8
+radius = 12
+background_opacity = 0.94
+reserve_space = true
+start = ["launcher", "workspaces", "active_window"]
+center = ["clock"]
+end = ["privacy", "tray", "caffeine", "power_profile", "network", "bluetooth", "volume", "brightness", "battery", "notifications", "control-center", "session"]
+[dock]
+enabled = true
+position = "bottom"
+icon_size = 48
+main_axis_padding = 14
+cross_axis_padding = 8
+radius = 20
+margin_edge = 10
+background_opacity = 0.90
+magnification = true
+magnification_scale = 1.4
+show_dots = true
+show_running = true
+show_instance_count = true
+auto_hide = true
+smart_auto_hide = true
+reserve_space = false
+launcher_position = "start"
+pinned = ["com.mitchellh.ghostty", "zen", "dev.hash.Editor", "thunar", "localsend", "com.obsproject.Studio"]
+[[control_center.shortcuts]]
+type = "wifi"
+[[control_center.shortcuts]]
+type = "bluetooth"
+[[control_center.shortcuts]]
+type = "nightlight"
+[[control_center.shortcuts]]
+type = "notification"
+[[control_center.shortcuts]]
+type = "power_profile"
+[[control_center.shortcuts]]
+type = "screen_recorder"
+[[control_center.shortcuts]]
+type = "caffeine"
+[plugins]
+enabled = ["noctalia/screen_recorder"]
+auto_update = "official"
+
+[theme.templates.user.hyprtoolkit]
+input_path = "~/.config/noctalia/templates/hyprtoolkit.conf"
+output_path = "~/.config/hypr/hyprtoolkit.conf"
+[theme.templates.user.nvim]
+input_path = "~/.config/noctalia/templates/nvim.lua"
+output_path = "~/.config/nvim/lua/hash_palette.lua"

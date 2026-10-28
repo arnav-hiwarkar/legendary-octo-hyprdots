@@ -1,0 +1,15 @@
+#!/bin/bash
+# Workspace overview controls. A state file records whether the overview is open so that a
+# three-finger swipe down closes it instead of opening the launcher.
+state="$XDG_RUNTIME_DIR/hash-overview.open"
+expo() { hyprctl repl "hl.plugin.hyprexpo.expo(\"$1\")" >/dev/null; }
+case "$1" in
+    toggle)
+        if [ -e "$state" ]; then expo off; rm -f "$state"; else expo on; touch "$state"; fi ;;
+    up)
+        expo on; touch "$state" ;;
+    down)
+        if [ -e "$state" ]; then expo off; rm -f "$state"; else noctalia msg panel-toggle launcher; fi ;;
+    *)
+        echo "usage: hash-overview toggle|up|down" >&2; exit 2 ;;
+esac

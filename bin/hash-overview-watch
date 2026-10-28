@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+# Clears the overview state file when the workspace changes, which is how the overview closes
+# when a workspace is picked from it. Opening and closing the overview emits no such event.
+import glob, os, socket
+rt = os.environ["XDG_RUNTIME_DIR"]
+state = os.path.join(rt, "hash-overview.open")
+sock_path = max(glob.glob(os.path.join(rt, "hypr", "*", ".socket2.sock")), key=os.path.getmtime)
+s = socket.socket(socket.AF_UNIX)
+s.connect(sock_path)
+buf = b""
+while True:
+    data = s.recv(4096)
+    if not data:
+        break
+    buf += data
+    *lines, buf = buf.split(b"\n")
+    for line in lines:
+        if line.startswith((b"workspace>>", b"workspacev2>>")):
+            try:
+                os.remove(state)
+            except FileNotFoundError:
+                pass

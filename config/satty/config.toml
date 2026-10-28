@@ -1,0 +1,5 @@
+[general]
+initial-tool = "brush"
+copy-command = "wl-copy"
+output-filename = "/home/ash/Pictures/Screenshots/screenshot-%Y%m%d-%H%M%S.png"
+early-exit = false

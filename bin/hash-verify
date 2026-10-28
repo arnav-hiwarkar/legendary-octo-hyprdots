@@ -1,0 +1,23 @@
+#!/bin/sh
+set -u
+fail=0
+check() { if "$@" >/dev/null 2>&1; then printf 'OK   %s\n' "$*"; else printf 'FAIL %s\n' "$*"; fail=1; fi; }
+check noctalia config validate "$HOME/.config/noctalia/config.toml"
+check noctalia msg status
+check noctalia msg color-scheme-get
+check systemctl --user is-active pipewire pipewire-pulse wireplumber xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk gnome-keyring-daemon
+check systemctl is-active NetworkManager bluetooth power-profiles-daemon
+check pgrep -x noctalia
+check pgrep -x kdeconnectd
+check test -x "$HOME/.local/opt/localsend-1.18.2/localsend_app"
+check test -s "$HOME/.config/nvim/lua/hash_palette.lua"
+check rustup run stable rust-analyzer --version
+if pgrep -x waybar >/dev/null || pgrep -x swaync >/dev/null || pgrep -x hypridle >/dev/null || pgrep -x swaybg >/dev/null || pgrep -f '^nwg-dock-hyprland' >/dev/null; then
+    echo 'FAIL overlapping legacy desktop process'; fail=1
+else
+    echo 'OK   no overlapping legacy desktop processes'
+fi
+if command -v hyprctl >/dev/null && hyprctl plugin list | grep -q 'Plugin hyprexpo'; then echo 'OK   workspace overview plugin'; else echo 'FAIL workspace overview plugin'; fail=1; fi
+errors=$(hyprctl configerrors 2>&1)
+if [ -n "$(printf '%s' "$errors" | tr -d '[:space:]')" ]; then printf 'FAIL Hyprland: %s\n' "$errors"; fail=1; else echo 'OK   Hyprland configuration'; fi
+exit "$fail"

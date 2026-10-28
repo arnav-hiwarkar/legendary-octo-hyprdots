@@ -1,0 +1,5 @@
+#!/bin/sh
+if ! hyprctl clients -j | python3 -c 'import json,sys; raise SystemExit(not any(w.get("initialClass") == "dev.hash.Scratchpad" for w in json.load(sys.stdin)))'; then
+    hyprctl dispatch 'hl.dsp.exec_cmd("ghostty --class=dev.hash.Scratchpad")' >/dev/null
+fi
+hyprctl dispatch 'hl.dsp.workspace.toggle_special("magic")' >/dev/null

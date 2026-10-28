@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=AstroNvim
+Comment=Rust and development editor
+Exec=ghostty --class=dev.hash.Editor --command=nvim
+Icon=nvim
+Terminal=false
+Type=Application
+Categories=Development;TextEditor;
+StartupWMClass=dev.hash.Editor

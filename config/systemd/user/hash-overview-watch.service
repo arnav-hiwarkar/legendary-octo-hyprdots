@@ -1,0 +1,11 @@
+[Unit]
+Description=Clear workspace overview state when a workspace is picked
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=%h/.local/bin/hash-overview-watch
+Restart=always
+
+[Install]
+WantedBy=graphical-session.target

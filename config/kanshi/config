@@ -1,0 +1,12 @@
+# kanshi profiles: a profile applies when exactly its listed outputs are connected.
+
+# Laptop panel only (current hardware).
+profile laptop {
+    output eDP-1 enable mode 1920x1080@60Hz position 0,0 scale 1
+}
+
+# Docked example. Uncomment and set the external output name from `hyprctl monitors`.
+# profile docked {
+#     output eDP-1 disable
+#     output DP-1 enable mode 2560x1440@60Hz position 0,0 scale 1
+# }
